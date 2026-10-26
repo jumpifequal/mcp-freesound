@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 600" width="520" height="600" role="img" aria-labelledby="t">
+  <title id="t">mcp-freesound</title>
+  <defs>
+    <!-- pillow body -->
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="0.55" stop-color="#D946EF"/>
+      <stop offset="1" stop-color="#FB7185"/>
+    </linearGradient>
+    <radialGradient id="puff" cx="0.32" cy="0.26" r="0.85">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.35" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rim" cx="0.5" cy="0.5" r="0.62">
+      <stop offset="0.72" stop-color="#3B0764" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3B0764" stop-opacity="0.38"/>
+    </radialGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- bars -->
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#F5E8FF"/>
+    </linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="0.6" stop-color="#C026D3"/>
+      <stop offset="1" stop-color="#F43F5E"/>
+    </linearGradient>
+    <filter id="drop" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="16"/>
+      <feOffset dy="22"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feFlood flood-color="#5B21B6"/>
+      <feComposite operator="in" in2="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dy="7"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.30"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="textshadow" x="-10%" y="-40%" width="120%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dy="4"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- puffy pillow outline: squircle with slightly bulging sides -->
+    <path id="pillow" d="M260 60
+      C372 56 446 70 456 150
+      C466 214 466 286 456 350
+      C446 430 372 444 260 440
+      C148 444 74 430 64 350
+      C54 286 54 214 64 150
+      C74 70 148 56 260 60 Z"/>
+  </defs>
+
+  <!-- ground shadow -->
+  <ellipse cx="260" cy="462" rx="170" ry="14" fill="#4C1D95" opacity="0.16"/>
+
+  <g filter="url(#drop)">
+    <use href="#pillow" fill="url(#body)"/>
+  </g>
+  <use href="#pillow" fill="url(#rim)"/>
+  <use href="#pillow" fill="url(#puff)"/>
+  <!-- glossy highlight -->
+  <path d="M150 92 C210 78 320 78 380 94 C404 100 410 118 392 126 C330 112 196 112 132 128 C116 120 124 98 150 92 Z" fill="url(#gloss)" opacity="0.8"/>
+
+  <!-- sound wave: puffy capsules -->
+  <g filter="url(#soft)" fill="url(#bar)">
+    <rect x="118" y="226" width="34" height="56" rx="17"/>
+    <rect x="170" y="186" width="34" height="136" rx="17"/>
+    <rect x="222" y="146" width="34" height="216" rx="17"/>
+    <rect x="274" y="176" width="34" height="156" rx="17"/>
+    <rect x="326" y="206" width="34" height="96" rx="17"/>
+    <rect x="378" y="232" width="34" height="44" rx="17"/>
+  </g>
+  <!-- tiny specular dots on capsules -->
+  <g fill="#ffffff" opacity="0.9">
+    <ellipse cx="129" cy="240" rx="5" ry="8"/>
+    <ellipse cx="181" cy="202" rx="5" ry="10"/>
+    <ellipse cx="233" cy="164" rx="5" ry="12"/>
+    <ellipse cx="285" cy="192" rx="5" ry="10"/>
+    <ellipse cx="337" cy="220" rx="5" ry="8"/>
+    <ellipse cx="389" cy="244" rx="4" ry="6"/>
+  </g>
+  <!-- connection nodes (protocol hint) -->
+  <g>
+    <circle cx="96" cy="254" r="9" fill="#ffffff" opacity="0.85"/>
+    <circle cx="434" cy="254" r="9" fill="#ffffff" opacity="0.85"/>
+    <path d="M105 254 H118 M412 254 H425" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  </g>
+
+  <!-- wordmark -->
+  <g filter="url(#textshadow)" font-family="Nunito, 'Varela Round', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="64" text-anchor="middle">
+    <text x="260" y="560" letter-spacing="-1"><tspan fill="#A78BFA">mcp-</tspan><tspan fill="url(#word)">freesound</tspan></text>
+  </g>
+</svg>

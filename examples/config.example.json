@@ -1,0 +1,15 @@
+{
+  "api_key": "your_freesound_api_key",
+  "transport": "stdio",
+  "host": "127.0.0.1",
+  "port": 8000,
+  "path": "/mcp",
+  "auth_token": "",
+  "allowed_origins": [],
+  "tls_cert": "",
+  "tls_key": "",
+  "download_dir": "~/Downloads/freesound",
+  "allow_downloads": true,
+  "timeout": 30.0,
+  "log_level": "INFO"
+}

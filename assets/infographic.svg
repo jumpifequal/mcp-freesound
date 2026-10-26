@@ -1,0 +1,287 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 960" width="1600" height="960" role="img" aria-labelledby="title desc">
+  <title id="title">How mcp-freesound works</title>
+  <desc id="desc">AI clients connect over stdio or HTTP with a bearer token to the mcp-freesound server, which exposes 13 tools and calls the Freesound API v2.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F0A1F"/>
+      <stop offset="1" stop-color="#1A1033"/>
+    </linearGradient>
+    <radialGradient id="glowL" cx="0.15" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowR" cx="0.9" cy="0.85" r="0.55">
+      <stop offset="0" stop-color="#F43F5E" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#F43F5E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="0.55" stop-color="#D946EF"/>
+      <stop offset="1" stop-color="#FB7185"/>
+    </linearGradient>
+    <linearGradient id="brandH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A78BFA"/>
+      <stop offset="0.6" stop-color="#E879F9"/>
+      <stop offset="1" stop-color="#FB7185"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A1A4F"/>
+      <stop offset="1" stop-color="#1D1238"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dy="8"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.45"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C4B5FD"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#FDA4AF"/>
+    </marker>
+    <style>
+      text { font-family: Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
+      .h1 { font-size: 40px; font-weight: 800; fill: #ffffff; }
+      .sub { font-size: 18px; fill: #C4B5FD; }
+      .label { font-size: 13px; font-weight: 700; letter-spacing: 2.5px; fill: #A78BFA; }
+      .title { font-size: 20px; font-weight: 700; fill: #ffffff; }
+      .body { font-size: 15px; fill: #D8D0F0; }
+      .small { font-size: 13px; fill: #B9AEDA; }
+      .mono { font-family: 'JetBrains Mono', Consolas, 'SF Mono', Menlo, monospace; font-size: 13.5px; fill: #F5D0FE; }
+      .tool { font-family: 'JetBrains Mono', Consolas, 'SF Mono', Menlo, monospace; font-size: 13px; fill: #F3E8FF; }
+      .step { font-size: 15px; font-weight: 800; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="1600" height="960" rx="28" fill="url(#bg)"/>
+  <rect width="1600" height="960" rx="28" fill="url(#glowL)"/>
+  <rect width="1600" height="960" rx="28" fill="url(#glowR)"/>
+
+  <!-- header -->
+  <g transform="translate(64 58)">
+    <rect x="0" y="0" width="56" height="56" rx="18" fill="url(#brand)"/>
+    <g fill="#ffffff">
+      <rect x="10" y="22" width="6" height="12" rx="3"/>
+      <rect x="19" y="15" width="6" height="26" rx="3"/>
+      <rect x="28" y="9" width="6" height="38" rx="3"/>
+      <rect x="37" y="16" width="6" height="24" rx="3"/>
+      <rect x="46" y="23" width="4" height="10" rx="2"/>
+    </g>
+    <text x="78" y="38" class="h1">How <tspan fill="url(#brandH)">mcp-freesound</tspan> works</text>
+    <text x="80" y="72" class="sub">From a question in your AI assistant to licensed sounds from Freesound.org, in pure Python with zero dependencies</text>
+  </g>
+
+  <!-- column labels -->
+  <text x="64" y="186" class="label">1 · AI CLIENTS</text>
+  <text x="404" y="186" class="label">2 · TRANSPORT</text>
+  <text x="724" y="186" class="label">3 · MCP-FREESOUND SERVER</text>
+  <text x="1292" y="186" class="label">4 · FREESOUND</text>
+
+  <!-- ============ clients ============ -->
+  <g filter="url(#shadow)">
+    <rect x="64" y="206" width="280" height="96" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+    <rect x="64" y="318" width="280" height="96" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+    <rect x="64" y="430" width="280" height="96" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+  </g>
+  <g>
+    <circle cx="106" cy="254" r="20" fill="#7C3AED" opacity="0.35"/>
+    <path d="M96 246 h20 a4 4 0 0 1 4 4 v8 a4 4 0 0 1 -4 4 h-12 l-8 6 v-6 a4 4 0 0 1 -4 -4 v-8 a4 4 0 0 1 4 -4z" fill="#E9D5FF"/>
+    <text x="140" y="248" class="title">Claude Desktop</text>
+    <text x="140" y="272" class="small">chat assistant on your PC</text>
+
+    <circle cx="106" cy="366" r="20" fill="#7C3AED" opacity="0.35"/>
+    <text x="106" y="372" text-anchor="middle" font-family="Consolas, monospace" font-size="17" font-weight="700" fill="#E9D5FF">&gt;_</text>
+    <text x="140" y="360" class="title">Claude Code</text>
+    <text x="140" y="384" class="small">terminal &amp; IDE agent</text>
+
+    <circle cx="106" cy="478" r="20" fill="#7C3AED" opacity="0.35"/>
+    <g fill="#E9D5FF"><circle cx="98" cy="472" r="4"/><circle cx="114" cy="472" r="4"/><circle cx="106" cy="486" r="4"/></g>
+    <path d="M98 472 L114 472 L106 486 Z" stroke="#E9D5FF" stroke-width="2" fill="none"/>
+    <text x="140" y="472" class="title">Any MCP client</text>
+    <text x="140" y="496" class="small">IDEs, agents, pipelines</text>
+  </g>
+
+  <!-- ============ transports ============ -->
+  <g filter="url(#shadow)">
+    <rect x="404" y="206" width="260" height="146" rx="18" fill="url(#card)" stroke="#A78BFA" stroke-opacity="0.45"/>
+    <rect x="404" y="370" width="260" height="156" rx="18" fill="url(#card)" stroke="#FB7185" stroke-opacity="0.55"/>
+  </g>
+  <text x="426" y="242" class="title">stdio</text>
+  <rect x="590" y="224" width="56" height="24" rx="12" fill="#7C3AED" opacity="0.45"/>
+  <text x="618" y="241" text-anchor="middle" font-size="12" font-weight="700" fill="#EDE9FE">default</text>
+  <text x="426" y="270" class="body">client launches the server</text>
+  <text x="426" y="292" class="body">as a local child process</text>
+  <text x="426" y="324" class="mono">JSON-RPC over stdin/stdout</text>
+
+  <text x="426" y="406" class="title">HTTP + Bearer</text>
+  <g transform="translate(612 384)">
+    <rect x="0" y="8" width="24" height="18" rx="4" fill="#FB7185"/>
+    <path d="M5 9 v-4 a7 7 0 0 1 14 0 v4" stroke="#FB7185" stroke-width="3.5" fill="none"/>
+    <circle cx="12" cy="17" r="2.6" fill="#1A1033"/>
+  </g>
+  <text x="426" y="434" class="body">shared or remote server</text>
+  <text x="426" y="460" class="mono">Authorization: Bearer ···</text>
+  <text x="426" y="486" class="small">TLS · Origin check · sessions</text>
+  <text x="426" y="508" class="small">/health · 401 / 403 / 404 guards</text>
+
+  <!-- client -> transport arrows -->
+  <g stroke="#C4B5FD" stroke-width="2.5" fill="none" opacity="0.85">
+    <path d="M344 254 C370 254 378 270 402 274" marker-end="url(#arrow)"/>
+    <path d="M344 366 C372 366 376 300 402 290" marker-end="url(#arrow)"/>
+    <path d="M344 478 C372 478 378 454 402 448" marker-end="url(#arrowPink)" stroke="#FDA4AF"/>
+  </g>
+
+  <!-- ============ core server ============ -->
+  <g filter="url(#shadow)">
+    <rect x="724" y="206" width="508" height="560" rx="24" fill="url(#core)" stroke="url(#brand)" stroke-width="2"/>
+  </g>
+  <!-- transport -> core arrows -->
+  <g stroke-width="3" fill="none">
+    <path d="M664 278 H722" stroke="#C4B5FD" marker-end="url(#arrow)"/>
+    <path d="M664 448 C694 448 694 300 722 292" stroke="#FDA4AF" marker-end="url(#arrowPink)"/>
+  </g>
+
+  <!-- layer: protocol -->
+  <rect x="748" y="228" width="460" height="84" rx="14" fill="#ffffff" fill-opacity="0.06"/>
+  <text x="768" y="258" class="title">MCP protocol layer</text>
+  <text x="768" y="284" class="body">JSON-RPC 2.0 · initialize · tools/list · tools/call</text>
+  <text x="768" y="303" class="small">negotiates 2025-06-18 · 2025-03-26 · 2024-11-05</text>
+
+  <path d="M978 314 V330" stroke="#C4B5FD" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- layer: tools -->
+  <rect x="748" y="334" width="460" height="290" rx="14" fill="#ffffff" fill-opacity="0.06"/>
+  <text x="768" y="364" class="title">13 tools</text>
+  <text x="1188" y="364" text-anchor="end" class="small">typed JSON Schema inputs</text>
+  <g>
+    <!-- pills: two columns -->
+    <g fill="#8B5CF6" fill-opacity="0.22" stroke="#A78BFA" stroke-opacity="0.45">
+      <rect x="768" y="380" width="206" height="28" rx="14"/>
+      <rect x="982" y="380" width="206" height="28" rx="14"/>
+      <rect x="768" y="414" width="206" height="28" rx="14"/>
+      <rect x="982" y="414" width="206" height="28" rx="14"/>
+      <rect x="768" y="448" width="206" height="28" rx="14"/>
+      <rect x="982" y="448" width="206" height="28" rx="14"/>
+      <rect x="768" y="482" width="206" height="28" rx="14"/>
+      <rect x="982" y="482" width="206" height="28" rx="14"/>
+      <rect x="768" y="516" width="206" height="28" rx="14"/>
+      <rect x="982" y="516" width="206" height="28" rx="14"/>
+    </g>
+    <g fill="#F43F5E" fill-opacity="0.20" stroke="#FB7185" stroke-opacity="0.55">
+      <rect x="768" y="550" width="206" height="28" rx="14"/>
+      <rect x="982" y="550" width="206" height="28" rx="14"/>
+      <rect x="768" y="584" width="420" height="28" rx="14"/>
+    </g>
+    <g class="tool">
+      <text x="784" y="399">search_sounds</text>
+      <text x="998" y="399">get_sound</text>
+      <text x="784" y="433">find_similar_sounds</text>
+      <text x="998" y="433">get_sound_analysis</text>
+      <text x="784" y="467">get_sound_comments</text>
+      <text x="998" y="467">get_user</text>
+      <text x="784" y="501">get_user_sounds</text>
+      <text x="998" y="501">get_user_packs</text>
+      <text x="784" y="535">get_pack</text>
+      <text x="998" y="535">get_pack_sounds</text>
+      <text x="784" y="569">get_attribution</text>
+      <text x="998" y="569">download_preview</text>
+      <text x="784" y="603">get_api_usage</text>
+    </g>
+    <text x="1172" y="603" text-anchor="end" class="small">credits · licenses · previews</text>
+  </g>
+
+  <path d="M978 626 V642" stroke="#C4B5FD" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- layer: client -->
+  <rect x="748" y="646" width="460" height="98" rx="14" fill="#ffffff" fill-opacity="0.06"/>
+  <text x="768" y="676" class="title">Freesound client</text>
+  <text x="768" y="702" class="body">stdlib urllib · timeouts · clear error messages</text>
+  <text x="768" y="726" class="mono">Authorization: Token &lt;api key&gt;  (never in URLs)</text>
+
+  <!-- ============ freesound side ============ -->
+  <g filter="url(#shadow)">
+    <rect x="1292" y="206" width="244" height="230" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+    <rect x="1292" y="454" width="244" height="150" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+  </g>
+  <!-- cloud -->
+  <path d="M1336 286 a22 22 0 0 1 4 -43 a30 30 0 0 1 56 -8 a24 24 0 0 1 34 22 a18 18 0 0 1 -4 35 z" fill="url(#brand)" opacity="0.9"/>
+  <text x="1314" y="324" class="title">Freesound API v2</text>
+  <text x="1314" y="350" class="body">600k+ Creative Commons</text>
+  <text x="1314" y="372" class="body">sounds, packs, users,</text>
+  <text x="1314" y="394" class="body">audio descriptors</text>
+  <text x="1314" y="420" class="mono">/apiv2/search/ · /sounds/</text>
+
+  <!-- folder -->
+  <path d="M1316 486 h28 l8 8 h36 a6 6 0 0 1 6 6 v34 a6 6 0 0 1 -6 6 h-72 a6 6 0 0 1 -6 -6 v-42 a6 6 0 0 1 6 -6 z" fill="#FB7185" opacity="0.85"/>
+  <text x="1408" y="512" class="title">Local folder</text>
+  <text x="1314" y="566" class="body">MP3/OGG previews saved</text>
+  <text x="1314" y="588" class="small">only from Freesound hosts</text>
+
+  <!-- core -> freesound arrows -->
+  <g stroke-width="3" fill="none">
+    <path d="M1232 694 C1262 694 1258 330 1290 322" stroke="#C4B5FD" marker-end="url(#arrow)"/>
+    <path d="M1290 350 C1268 352 1266 704 1234 712" stroke="#E879F9" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+    <path d="M1232 580 C1258 580 1262 528 1290 526" stroke="#FDA4AF" marker-end="url(#arrowPink)"/>
+  </g>
+
+  <!-- ============ bottom band: config + gui ============ -->
+  <g filter="url(#shadow)">
+    <rect x="64" y="800" width="860" height="104" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+    <rect x="948" y="800" width="588" height="104" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+  </g>
+  <text x="88" y="834" class="label">CONFIGURATION · LATER SOURCES WIN</text>
+  <g font-size="15" font-weight="700" text-anchor="middle">
+    <rect x="88" y="852" width="118" height="32" rx="16" fill="#ffffff" fill-opacity="0.08"/>
+    <text x="147" y="873" fill="#E9D5FF">defaults</text>
+    <text x="226" y="874" fill="#A78BFA">›</text>
+    <rect x="246" y="852" width="128" height="32" rx="16" fill="#ffffff" fill-opacity="0.08"/>
+    <text x="310" y="873" fill="#E9D5FF">config file</text>
+    <text x="394" y="874" fill="#A78BFA">›</text>
+    <rect x="414" y="852" width="86" height="32" rx="16" fill="#ffffff" fill-opacity="0.08"/>
+    <text x="457" y="873" fill="#E9D5FF">.env</text>
+    <text x="520" y="874" fill="#A78BFA">›</text>
+    <rect x="540" y="852" width="196" height="32" rx="16" fill="#ffffff" fill-opacity="0.08"/>
+    <text x="638" y="873" fill="#E9D5FF">environment variables</text>
+    <text x="756" y="874" fill="#A78BFA">›</text>
+    <rect x="776" y="852" width="124" height="32" rx="16" fill="url(#brand)"/>
+    <text x="838" y="873" fill="#ffffff">CLI flags</text>
+  </g>
+
+  <text x="972" y="834" class="label">CONFIGURATION GUI</text>
+  <!-- mini window -->
+  <g transform="translate(972 848)">
+    <rect width="64" height="42" rx="7" fill="#ffffff" fill-opacity="0.10" stroke="#C4B5FD" stroke-opacity="0.6"/>
+    <circle cx="9" cy="8" r="2.5" fill="#FB7185"/><circle cx="17" cy="8" r="2.5" fill="#FACC15"/><circle cx="25" cy="8" r="2.5" fill="#4ADE80"/>
+    <rect x="8" y="17" width="48" height="6" rx="3" fill="#C4B5FD" opacity="0.6"/>
+    <rect x="8" y="28" width="30" height="6" rx="3" fill="url(#brand)"/>
+  </g>
+  <text x="1054" y="864" class="body">API key test · token generator · client snippets</text>
+  <text x="1054" y="888" class="body">one-click Claude Desktop setup · server runner</text>
+
+  <!-- numbered flow badges -->
+  <g>
+    <circle cx="374" cy="240" r="14" fill="url(#brand)"/><text x="374" y="245" class="step">1</text>
+    <circle cx="694" cy="258" r="14" fill="url(#brand)"/><text x="694" y="263" class="step">2</text>
+    <circle cx="1262" cy="258" r="14" fill="url(#brand)"/><text x="1262" y="263" class="step">3</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="64" y="548" width="600" height="218" rx="18" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.12"/>
+  </g>
+  <text x="88" y="582" class="label">THE FLOW</text>
+  <g>
+    <circle cx="102" cy="612" r="13" fill="url(#brand)"/><text x="102" y="617" class="step">1</text>
+    <text x="128" y="618" class="body">The assistant chooses a tool and sends its arguments</text>
+    <circle cx="102" cy="650" r="13" fill="url(#brand)"/><text x="102" y="655" class="step">2</text>
+    <text x="128" y="656" class="body">The transport delivers it (bearer token + Origin check on HTTP)</text>
+    <circle cx="102" cy="688" r="13" fill="url(#brand)"/><text x="102" y="693" class="step">3</text>
+    <text x="128" y="694" class="body">The server queries Freesound and returns structured JSON</text>
+  </g>
+  <line x1="88" y1="716" x2="640" y2="716" stroke="#ffffff" stroke-opacity="0.10"/>
+  <text x="88" y="745" class="small">Zero runtime dependencies  ·  Python 3.10+  ·  Windows · macOS · Linux  ·  MIT</text>
+</svg>

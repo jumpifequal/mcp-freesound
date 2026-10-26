@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "freesound": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "http://127.0.0.1:8000/mcp", "--header", "Authorization:${MCP_FREESOUND_AUTH}"],
+      "env": {
+        "MCP_FREESOUND_AUTH": "Bearer your_bearer_token"
+      }
+    }
+  }
+}

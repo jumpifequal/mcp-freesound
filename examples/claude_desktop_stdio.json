@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "freesound": {
+      "command": "mcp-freesound",
+      "args": ["serve", "--transport", "stdio"],
+      "env": {
+        "FREESOUND_API_KEY": "your_freesound_api_key"
+      }
+    }
+  }
+}

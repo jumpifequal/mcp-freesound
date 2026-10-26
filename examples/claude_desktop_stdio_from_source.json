@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "freesound": {
+      "command": "python",
+      "args": ["C:/path/to/mcp-freesound/mcp-freesound.py", "serve", "--transport", "stdio"],
+      "env": {
+        "FREESOUND_API_KEY": "your_freesound_api_key"
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-freesound"
+version = "1.0.0"
+description = "Pure-Python, zero-dependency MCP server for searching and exploring Freesound.org audio (stdio or HTTP with bearer token), with a configuration GUI."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "jumpnotequal" }]
+keywords = ["mcp", "model-context-protocol", "freesound", "audio", "sound-effects", "claude", "llm", "video-editing"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/jumpnotequal/mcp-freesound"
+Repository = "https://github.com/jumpnotequal/mcp-freesound"
+Issues = "https://github.com/jumpnotequal/mcp-freesound/issues"
+Changelog = "https://github.com/jumpnotequal/mcp-freesound/blob/main/CHANGELOG.md"
+
+[project.scripts]
+mcp-freesound = "mcp_freesound.cli:main"
+
+[project.gui-scripts]
+mcp-freesound-gui = "mcp_freesound.gui:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_freesound"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/", "mcp-freesound.py", "README.md", "README-it.md", "LICENSE", "CHANGELOG.md", "examples/", "docs/", "assets/", "test/*.py", "test/README.md"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "A"]
